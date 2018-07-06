@@ -18,6 +18,9 @@ class CreateTableInDatabase extends Migration
             $table->string('title')->unique();
             $table->string('slug')->unique();
             $table->text('description')->nullable();
+            $table->string('metaTitle')->nullable();
+            $table->text('metaDescription')->nullable();
+            $table->text('canonicalUrl')->nullable();
             $table->timestamps();
         });
 

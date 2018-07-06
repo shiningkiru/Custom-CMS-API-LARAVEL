@@ -57,7 +57,7 @@ class AuthController extends Controller
             ], 400);
         }
         $user = \Auth::user();
-        $customClaims=['user_id'=>$user->id, 'name'=>$user->name, 'email'=>$user->email];
+        $customClaims=['user_id'=>$user->id, 'name'=>$user->name, 'email'=>$user->email, 'roles'=>$user->roles];
         $token = JWTAuth::fromUser(\Auth::user(), $customClaims);
         return response([
             'status' => 'success',

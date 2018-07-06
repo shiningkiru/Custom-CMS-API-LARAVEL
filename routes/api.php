@@ -50,6 +50,8 @@ Route::resource('testimonials', 'TestimonialsController');
 Route::resource('partners', 'PartnersController');
 Route::resource('teams', 'TeamsController');
 Route::resource('app-setting', 'AppSettingController');
+Route::post('contact', 'ContactController@sendMail');
+Route::post('user/create-user', 'UserController@createUser');//->middleware('route.auth');
 Route::middleware('jwt.auth')->get('users', function(Request $request) {
     return auth()->user();
 });

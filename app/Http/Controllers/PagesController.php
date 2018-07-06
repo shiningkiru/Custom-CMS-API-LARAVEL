@@ -52,6 +52,9 @@ class PagesController extends Controller
             $pageobj->title=$pages['title']; 
             $pageobj->slug=$slug;
             $pageobj->description=$request->description;
+            $pageobj->metaTitle=$request->metaTitle;
+            $pageobj->metaDescription=$request->metaDescription;
+            $pageobj->canonicalUrl=$request->canonicalUrl;
             $pageobj->save();
             if(array_key_exists('sections',$pages)):
                 foreach($pages['sections'] as $sectObj){
@@ -84,6 +87,9 @@ class PagesController extends Controller
             $pageobj=Pages::find($request->id);
             $pageobj->title=$pages['title']; 
             $pageobj->description=$pages['description']; 
+            $pageobj->metaTitle=$request->metaTitle;
+            $pageobj->metaDescription=$request->metaDescription;
+            $pageobj->canonicalUrl=$request->canonicalUrl;
             $pageobj->save();
             if(array_key_exists('sections',$pages)):
                 foreach($pages['sections'] as $sectObj){
