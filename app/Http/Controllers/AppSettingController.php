@@ -6,8 +6,154 @@ use App\AppSetting;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 
+
 class AppSettingController  extends Controller
 {
+
+
+    /**
+     * @SWG\Post(
+     *      path="/app-setting",
+     *      operationId="setting-store",
+     *      tags={"Setting"},
+     *      summary="Store main app settings",
+     *      description="Returns list of menus",
+     *      @SWG\Parameter(
+     *          name="companyName",
+     *          description="Name of the company",
+     *          required=false,
+     *          type="string",
+     *          in="formData"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="description",
+     *          description="description of the company",
+     *          required=false,
+     *          type="string",
+     *          in="formData"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="primaryPhone",
+     *          description="Primary phone number of the company",
+     *          required=false,
+     *          type="string",
+     *          in="formData"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="secondaryPhone",
+     *          description="Secondary  phone number of the company",
+     *          required=false,
+     *          type="string",
+     *          in="formData"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="primaryEmail",
+     *          description="Primary Email of the company",
+     *          required=false,
+     *          type="string",
+     *          in="formData"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="secondaryEmail",
+     *          description="Secondary email of the company",
+     *          required=false,
+     *          type="string",
+     *          in="formData"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="primaryAddress",
+     *          description="Primary address of the company",
+     *          required=false,
+     *          type="string",
+     *          in="formData"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="secondaryAddress",
+     *          description="Secondary address of the company",
+     *          required=false,
+     *          type="string",
+     *          in="formData"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="facebookLink",
+     *          description="Facebook link of the company",
+     *          required=false,
+     *          type="string",
+     *          in="formData"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="twitterLink",
+     *          description="Twitter link of the company",
+     *          required=false,
+     *          type="string",
+     *          in="formData"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="instaLink",
+     *          description="Instagram link of the company",
+     *          required=false,
+     *          type="string",
+     *          in="formData"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="googleLink",
+     *          description="Google link of the company",
+     *          required=false,
+     *          type="string",
+     *          in="formData"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="whatsAppLink",
+     *          description="Whatsapp link of the company",
+     *          required=false,
+     *          type="string",
+     *          in="formData"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="youtubeLink",
+     *          description="Youtube link of the company",
+     *          required=false,
+     *          type="string",
+     *          in="formData"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="footerMessage",
+     *          description="Copyright message of footer",
+     *          required=false,
+     *          type="string",
+     *          in="formData"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="embedMap",
+     *          description="Embed map code for the site",
+     *          required=false,
+     *          type="string",
+     *          in="formData"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="longitude",
+     *          description="Longitude of company location",
+     *          required=false,
+     *          type="string",
+     *          in="formData"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="latitude",
+     *          description="Latitude of company location",
+     *          required=false,
+     *          type="string",
+     *          in="formData"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation"
+     *       ),
+     *       @SWG\Response(response=500, description="Internal server error"),
+     *       @SWG\Response(response=400, description="Bad request"),
+     *     )
+     *
+     * Returns list of menus
+     */
     public function store(Request $request)
     {
         $setting = AppSetting::find(999);
@@ -49,6 +195,23 @@ class AppSettingController  extends Controller
         return response()->json("DATA UPDATED", 200); 
     }
 
+    
+    /**
+     * @SWG\Get(
+     *      path="/app-setting",
+     *      operationId="setting-index",
+     *      tags={"Setting"},
+     *      summary="Get saved settings",
+     *      description="Returns saved settings",
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation"
+     *       ),
+     *       @SWG\Response(response=400, description="Bad request")
+     *     )
+     *
+     * Returns setting details
+     */
     public function index(){
         $setting= AppSetting::find(999);
         return response()->json($setting, 200);

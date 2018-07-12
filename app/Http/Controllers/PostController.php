@@ -34,15 +34,15 @@ class PostController extends Controller
       $post->title=$request->title;
       $post->description = $request->description;
       
-      $imageName=null;
       if($request->file('image') != null):
+          $imageName=null;
           $image = $request->file('image');
           $imageName = uniqid().'post.'.$image->getClientOriginalExtension();
           $destinationPath = public_path('/uploads/post');
           $image->move($destinationPath, $imageName);
           $imageName = "/uploads/post/".$imageName;
+          $post->image= $imageName;
       endif;
-      $post->image= $imageName;
       
       try{
         $post->save();

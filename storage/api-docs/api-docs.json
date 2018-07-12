@@ -1,0 +1,286 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "CMS API",
+        "description": "CMS operations",
+        "version": "1.0.0"
+    },
+    "host": "192.168.1.152:52",
+    "basePath": "/api",
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "paths": {
+        "/app-setting": {
+            "get": {
+                "tags": [
+                    "Setting"
+                ],
+                "summary": "Get saved settings",
+                "description": "Returns saved settings",
+                "operationId": "setting-index",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Setting"
+                ],
+                "summary": "Store main app settings",
+                "description": "Returns list of menus",
+                "operationId": "setting-store",
+                "parameters": [
+                    {
+                        "name": "companyName",
+                        "in": "formData",
+                        "description": "Name of the company",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "description",
+                        "in": "formData",
+                        "description": "description of the company",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "primaryPhone",
+                        "in": "formData",
+                        "description": "Primary phone number of the company",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "secondaryPhone",
+                        "in": "formData",
+                        "description": "Secondary  phone number of the company",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "primaryEmail",
+                        "in": "formData",
+                        "description": "Primary Email of the company",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "secondaryEmail",
+                        "in": "formData",
+                        "description": "Secondary email of the company",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "primaryAddress",
+                        "in": "formData",
+                        "description": "Primary address of the company",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "secondaryAddress",
+                        "in": "formData",
+                        "description": "Secondary address of the company",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "facebookLink",
+                        "in": "formData",
+                        "description": "Facebook link of the company",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "twitterLink",
+                        "in": "formData",
+                        "description": "Twitter link of the company",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "instaLink",
+                        "in": "formData",
+                        "description": "Instagram link of the company",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "googleLink",
+                        "in": "formData",
+                        "description": "Google link of the company",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "whatsAppLink",
+                        "in": "formData",
+                        "description": "Whatsapp link of the company",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "youtubeLink",
+                        "in": "formData",
+                        "description": "Youtube link of the company",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "footerMessage",
+                        "in": "formData",
+                        "description": "Copyright message of footer",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "embedMap",
+                        "in": "formData",
+                        "description": "Embed map code for the site",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "longitude",
+                        "in": "formData",
+                        "description": "Longitude of company location",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "latitude",
+                        "in": "formData",
+                        "description": "Latitude of company location",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/banner-type": {
+            "get": {
+                "tags": [
+                    "Banner"
+                ],
+                "summary": "Get banner type(category) lists",
+                "description": "Returns banner type(category) lists",
+                "operationId": "banner-type-index",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Banner"
+                ],
+                "summary": "Create banner type",
+                "operationId": "banner-type-create",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "typeName",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/banner-type/{id}": {
+            "put": {
+                "tags": [
+                    "Banner"
+                ],
+                "summary": "Update banner type",
+                "operationId": "banner-type-update",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "typeName",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Banner"
+                ],
+                "summary": "Delete banner type child elements also deleted",
+                "operationId": "banner-type-destroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {}
+}

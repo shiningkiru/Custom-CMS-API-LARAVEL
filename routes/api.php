@@ -27,8 +27,6 @@ Route::group(['middleware' => 'jwt.auth'], function(){
 Route::middleware('jwt.refresh')->get('/token/refresh', 'AuthController@refresh');
 
 
-Route::resource('banner-type', 'BannerTypeController');
-Route::resource('banner', 'BannerController');
 Route::resource('page-property', 'PagePropertyController');
 Route::resource('menu', 'MenuController');//->middleware('route.auth');
 Route::resource('pages', 'PagesController');
@@ -36,6 +34,7 @@ Route::delete('pages/section/{id}', 'PagesController@sectionDestroy');
 Route::resource('page-section', 'PagesectionController');
 Route::get('page-section/outer/{id}', 'PagesectionController@showOuterSection');
 Route::get('page/slug', 'PagesController@pageSlug');
+Route::get('page/meta/{id}', 'PagesController@getPageMeta');
 Route::post('section', 'SectionController@updateSection');
 Route::get('section', 'SectionController@indexSection');
 Route::delete('section/{id}', 'SectionController@sectionDelete');
@@ -49,9 +48,17 @@ Route::delete('services/gallery/{id}', 'ServicesController@deleteGaleryImage');
 Route::resource('testimonials', 'TestimonialsController');
 Route::resource('partners', 'PartnersController');
 Route::resource('teams', 'TeamsController');
-Route::resource('app-setting', 'AppSettingController');
 Route::post('contact', 'ContactController@sendMail');
-Route::post('user/create-user', 'UserController@createUser');//->middleware('route.auth');
+Route::post('user', 'UserController@createUser')->middleware('route.auth');
+Route::get('user', 'UserController@getUser')->middleware('route.auth');
+Route::post('reset-link', 'UserController@sendResetLink');
+Route::post('reset-password', 'UserController@resetPassword');//->middleware('route.auth');
+
+/* generated api docs */
+Route::resource('app-setting', 'AppSettingController');
+Route::resource('banner-type', 'BannerTypeController');
+Route::resource('banner', 'BannerController');
+/* generated api docs */
 Route::middleware('jwt.auth')->get('users', function(Request $request) {
     return auth()->user();
 });

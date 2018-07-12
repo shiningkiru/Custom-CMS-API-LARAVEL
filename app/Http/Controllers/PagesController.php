@@ -153,4 +153,12 @@ class PagesController extends Controller
     {
         return Pages::with('page_sections')->where('id','=',$id)->get()->toArray()[0]; 
     }
+
+    public function getPageMeta($id){
+        $page = Pages::find($id);
+        $meta['meta-title']=$page->metaTitle;
+        $meta['meta-description']=$page->metaTitle;
+        $meta['meta-canonical-url']=$page->canonicalUrl;
+        return response()->json($meta,200);
+    }
 }
