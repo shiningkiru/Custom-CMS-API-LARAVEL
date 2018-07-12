@@ -51,7 +51,7 @@ Route::resource('teams', 'TeamsController');
 Route::post('contact', 'ContactController@sendMail');
 Route::post('user', 'UserController@createUser')->middleware('route.auth');
 Route::get('user', 'UserController@getUser')->middleware('route.auth');
-Route::post('reset-link', 'UserController@sendResetLink');
+Route::post('reset-link', 'UserController@sendResetLinks');
 Route::post('reset-password', 'UserController@resetPassword');//->middleware('route.auth');
 
 /* generated api docs */

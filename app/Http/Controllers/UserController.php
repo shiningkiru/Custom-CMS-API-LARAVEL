@@ -52,7 +52,7 @@ class UserController extends Controller
         return User::all()->toArray(); 
     }
 
-    public function sendResetLink(Request $request){
+    public function sendResetLinks(Request $request){
         $user = User::where('email', $request->email)->first();
         if (!$user) {
             $error_message = "Your email address was not found.";
@@ -61,7 +61,7 @@ class UserController extends Controller
         $hashToken=(explode("@",$request->email)[0]).uniqid();dump($hashToken);
         $token = ResetPassword::where('email','=',$request->email)->where('created_at','>',Carbon::now()->subHours(2))->first();
         if($token instanceof ResetPassword){
-            //return response()->json("Link Already Sent",400);
+           // return response()->json("Link Already Sent",400);
         }
 
         $token = ResetPassword::where('email','=',$request->email)->first();
@@ -73,23 +73,23 @@ class UserController extends Controller
         $token->created_at=Carbon::now();
         $token->save();
 
-
         
         try {
             $data['token']=$hashToken;
-            Mail::send('emails.forgot', $data, function($message) use ($request) {
-                $message->to($request->email, 'Nandu')
-                        ->subject('Forgot password reset link');
-                $message->from('donotreply@askumbau.com','donotreply@askumbau.com');
-            });
+            // Mail::send('emails.forgot', $data, function($message) use ($request) {
+            //     $message->to($request->email, 'Nandu')
+            //             ->subject('Forgot password reset link');
+            //     $message->from('donotreply@askumbau.com','donotreply@askumbau.com');
+            // });
+            return response()->json('A reset email has been sent! Please check your email.',200);
         } catch (\Exception $e) {
             //Return with error
             $error_message = $e->getMessage();
             return response()->json(['success' => false, 'error' => $error_message], 401);
         }
         return response()->json([
-            'success' => true, 'data'=> ['message'=> 'A reset email has been sent! Please check your email.']
-        ]);
+            'success' => true, 'data'=> 'A reset email has been sent! Please check your email.'
+        ],200);
     }
 
     public function resetPassword(Request $request){
