@@ -53,7 +53,7 @@ Route::post('user', 'UserController@createUser')->middleware('route.auth');
 Route::get('user', 'UserController@getUser')->middleware('route.auth');
 Route::post('reset-link', 'UserController@sendResetLinks');
 Route::post('reset-password', 'UserController@resetPassword');//->middleware('route.auth');
-
+Route::delete('user/{id}', 'UserController@deleteuser');
 /* generated api docs */
 Route::resource('app-setting', 'AppSettingController');
 Route::resource('banner-type', 'BannerTypeController');

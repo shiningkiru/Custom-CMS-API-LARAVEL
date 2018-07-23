@@ -114,4 +114,11 @@ class UserController extends Controller
         $user->save();
         return response()->json("Successfully updated",200);
     }
+
+  public function deleteuser($id)
+ {
+    $user=User::find($id);    
+    $user->delete();
+    return response()->json($user->toArray(), 200);
+ }
 }

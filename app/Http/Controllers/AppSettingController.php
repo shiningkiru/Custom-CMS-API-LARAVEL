@@ -156,6 +156,14 @@ class AppSettingController  extends Controller
      */
     public function store(Request $request)
     {
+      $validatedData = Validator::make($request->all(),[
+            'primaryEmail' => 'required',
+            'secondaryEmail' => 'required'
+        ]);
+        if ($validatedData->fails()) {
+            return response()->json($validatedData->errors(),400);
+        }
+
         $setting = AppSetting::find(999);
         if(!($setting instanceof AppSetting)){
             $setting=new AppSetting();

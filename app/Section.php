@@ -23,6 +23,4 @@ class Section extends Model
     {
         return $this->hasMany('App\PageSection','section_id');
     }
-
-
 }
