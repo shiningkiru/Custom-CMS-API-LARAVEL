@@ -58,7 +58,7 @@ class UserController extends Controller
             $error_message = "Your email address was not found.";
             return response()->json(['success' => false, 'email'=> $error_message], 401);
         }
-        $hashToken=(explode("@",$request->email)[0]).uniqid();dump($hashToken);
+        $hashToken=(explode("@",$request->email)[0]).uniqid();
         $token = ResetPassword::where('email','=',$request->email)->where('created_at','>',Carbon::now()->subHours(2))->first();
         if($token instanceof ResetPassword){
            // return response()->json("Link Already Sent",400);
@@ -76,11 +76,12 @@ class UserController extends Controller
         
         try {
             $data['token']=$hashToken;
-            // Mail::send('emails.forgot', $data, function($message) use ($request) {
-            //     $message->to($request->email, 'Nandu')
-            //             ->subject('Forgot password reset link');
-            //     $message->from('donotreply@askumbau.com','donotreply@askumbau.com');
-            // });
+
+            Mail::send('emails.forgot', $data, function($message) use ($request) {
+                $message->to($request->email, 'Nandu')
+                        ->subject('Forgot password reset link');
+                $message->from('donotreply@askumbau.com','donotreply@askumbau.com');
+            });
             return response()->json('A reset email has been sent! Please check your email.',200);
         } catch (\Exception $e) {
             //Return with error
