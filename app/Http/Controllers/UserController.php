@@ -45,6 +45,21 @@ class UserController extends Controller
             $user->password=bcrypt($request->password);
         $user->roles=$request->roles;
         $user->save();
+        try {
+            $fullName=$request->fullName;
+             $email=$request->email;
+             $password=$request->password;
+            Mail::send('emails.usermail', ['fullName' => $fullName, 'email' => $email, 'password' => $password], function($message) use ($request) {
+                $message->to($request->email, 'Nandu')
+                        ->subject('New user Created');
+                $message->from('donotreply@askumbau.com','donotreply@askumbau.com');
+            });
+            return response()->json('A reset email has been sent! Please check your email.',200);
+        } catch (\Exception $e) {
+            //Return with error
+            $error_message = $e->getMessage();
+            return response()->json(['success' => false, 'error' => $error_message], 401);
+        }
         return response()->json('SUCCESSFULLY UPDATED',200);
     }
 

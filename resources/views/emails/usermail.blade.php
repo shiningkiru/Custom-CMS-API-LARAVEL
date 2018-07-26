@@ -19,13 +19,20 @@
 </td></tr>
 <tr>
 <td colspan='2' style='background-color:#b79d52;font-size:15px;color:#fff;padding:3px 3px 3px 10px; '>
-<span style='margin-top:10px; margin-left:5px;' >ASK Umbau<strong> Passwort ändern</strong></span></td></tr>
+<span style='margin-top:10px; margin-left:5px;' >ASK Umbau<strong> Neue Benutzererstellung</strong></span></td></tr>
 <p style='margin-left:10px;margin-top:15px;font-family:Calibri;font-size: 15px;'><span style='margin-top:10px; margin-left:5px;' ><strong>Guten Tag,</strong> ASK Umbau,</span></p>
+<p style='padding-left: 15px;font-family:Calibri;font-size: 20px;'><strong>New User created successfully</p>
 <tr style='line-height:20px'><td style='padding:15px;'><div style='font-family:Calibri'> <span style='color:#000;font-size:16px; line-height:20px;'>
-
-<b>Klicken Sie hier, um das Passwort zurückzusetzen: </b> 
-<a href="http://localhost:4200/admin/forgot/{{ $token }}">Click Here</a>
+<b>Vollständiger Name: </b> 
+{{ $fullName }}
 <br/>
+<b>Email: </b> 
+{{ $email }}
+<br/>
+<b>Password: </b> 
+{{ $password }}
+<br/>
+Admin Dashboard Link: <a href="http://localhost:4200/admin/">Click Here</a>
 <br/>
 <br/>
 <span style='font-family:Calibri;'>Freundliche Grüsse,</span><br/>
