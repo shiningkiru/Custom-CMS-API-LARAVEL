@@ -33,6 +33,7 @@ Route::resource('pages', 'PagesController');
 Route::delete('pages/section/{id}', 'PagesController@sectionDestroy');
 Route::resource('page-section', 'PagesectionController');
 Route::get('page-section/outer/{id}', 'PagesectionController@showOuterSection');
+Route::post('page-section/outer/array', 'PagesectionController@showOuterSectionArray');
 Route::get('page/slug', 'PagesController@pageSlug');
 Route::get('page/meta/{id}', 'PagesController@getPageMeta');
 Route::post('section', 'SectionController@updateSection');

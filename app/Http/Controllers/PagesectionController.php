@@ -80,4 +80,34 @@ class PagesectionController extends Controller
         return $sectionData;
     }
 
+    public function showOuterSectionArray(Request $request){
+        $rules = array(
+            'sectionsArray.*.key' => 'required',
+            'sectionsArray.*.id' => 'required|exists:page_sections,id'
+        );
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return response()->json($validator->errors(),400);
+        }
+        $result=[];
+        foreach($request->sectionsArray as $sectionObj){
+            $sections = PageSection::with('page_section_props')->where('id','=',$sectionObj['id'])->get()->toArray();
+            $sectionData=[];
+            $section=$sections[0];
+            $sectionData['title']=$section['title'];
+            $propArray=[];
+            foreach($section['page_section_props'] as $prop){
+                $value='';
+                if($prop['type']=='link' || $prop['type']=='file')
+                    $value=$prop['link'];
+                else
+                    $value=$prop['value'];
+                $propArray[$prop['key']]=$value;
+            }
+            $sectionData['properties']=$propArray;
+            $result[$sectionObj['key']]=$sectionData;
+        }
+        return $result;
+    }
+
 }
