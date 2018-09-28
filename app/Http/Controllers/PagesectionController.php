@@ -38,9 +38,12 @@ class PagesectionController extends Controller
                         $sectionProp->link = "/uploads/section/".$image;
                     endif;
                 elseif($sectionProp->type == 'link'):
-                    $sectionProp->link = $prop['value'];
+                    if(array_key_exists('value',$prop)):
+                        $sectionProp->link = $prop['value'];
+                    endif;
                 else:
-                    $sectionProp->value = $prop['value'];
+                    if(array_key_exists('value',$prop))
+                        $sectionProp->value = $prop['value'];
                 endif;
                 // if(array_key_exists('value', $prop))
                 //     $sectionProp->value = $prop['value'];

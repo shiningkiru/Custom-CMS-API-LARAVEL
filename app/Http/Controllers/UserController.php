@@ -46,7 +46,7 @@ class UserController extends Controller
         $user->roles=$request->roles;
         $user->save();
         try {
-            $fullName=$request->fullName;
+             $fullName=$request->fullName;
              $email=$request->email;
              $password=$request->password;
             Mail::send('emails.usermail', ['fullName' => $fullName, 'email' => $email, 'password' => $password], function($message) use ($request) {
@@ -93,7 +93,7 @@ class UserController extends Controller
             $data['token']=$hashToken;
 
             Mail::send('emails.forgot', $data, function($message) use ($request) {
-                $message->to($request->email, 'Nandu')
+                $message->to($request->email, $request->email)
                         ->subject('Forgot password reset link');
                 $message->from('donotreply@askumbau.com','donotreply@askumbau.com');
             });

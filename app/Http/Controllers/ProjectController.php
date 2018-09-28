@@ -24,7 +24,7 @@ class ProjectController extends Controller
       }
       if(strtolower($project->title) != strtolower($request->get('title'))){
           $validatedData = Validator::make($request->all(),[
-              'title' => 'required|unique:projects',
+              'title' => 'required',
           ]);
           if ($validatedData->fails()) {
               return response()->json($validatedData->errors(),400);
@@ -33,7 +33,8 @@ class ProjectController extends Controller
 
       $project->title=$request->title;
       $project->description = $request->description;
-      
+      $project->address = $request->address;
+
       if($request->file('image') != null):
         $imageName=null;
           $image = $request->file('image');
@@ -47,8 +48,8 @@ class ProjectController extends Controller
       try{
         $project->save();
         $categoryArray=[];
-        foreach($request->categories as $category){
-            if(array_key_exists('selected',$category)){
+        foreach($request->categories as $category){ 
+            if(array_key_exists('selected',$category)){ 
                 if($category['selected'] == true){
                     if(array_key_exists('id',$category)){
                         $categoryArray[]=$category['id'];
@@ -56,6 +57,7 @@ class ProjectController extends Controller
                 }
             }
         }
+       
         $project->project_categories()->sync($categoryArray);
         return response()->json($project, 200);  
       }catch(\Exception $e){

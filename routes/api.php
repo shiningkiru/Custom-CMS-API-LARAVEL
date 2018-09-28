@@ -51,7 +51,7 @@ Route::resource('partners', 'PartnersController');
 Route::resource('teams', 'TeamsController');
 Route::post('contact', 'ContactController@sendMail');
 Route::post('user', 'UserController@createUser');
-Route::get('user', 'UserController@getUser')->middleware('route.auth');
+Route::get('user', 'UserController@getUser');
 Route::post('reset-link', 'UserController@sendResetLinks');
 Route::post('reset-password', 'UserController@resetPassword');//->middleware('route.auth');
 Route::delete('user/{id}', 'UserController@deleteuser');

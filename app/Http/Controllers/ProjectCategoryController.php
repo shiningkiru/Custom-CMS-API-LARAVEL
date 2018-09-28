@@ -39,7 +39,8 @@ class ProjectCategoryController extends Controller
         $projectCategory->title = $request->title;
         $projectCategory->description = $request->description;
 
-        try{
+        try
+        {
             $projectCategory->save();
             return response()->json($projectCategory, 200);  
         }catch(\Exception $e){
